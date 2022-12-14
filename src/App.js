@@ -2,7 +2,7 @@ import './scss/app.scss';
 import Header from './components/Header';
 import Categories from './components/Categories';
 import Sort from './components/Sort';
-import PizzaBlock from "./components/PizzaBlock";
+import PizzaBlock from './components/PizzaBlock';
 
 function App() {
   return (
@@ -16,18 +16,8 @@ function App() {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-              <PizzaBlock/>
-              <PizzaBlock/>
-              <PizzaBlock/>
-              <PizzaBlock/>
-              <PizzaBlock/>
-              <PizzaBlock/>
-              <PizzaBlock/>
-              <PizzaBlock/>
-              <PizzaBlock/>
-              <PizzaBlock/>
-              <PizzaBlock/>
-              <PizzaBlock/>
+            <PizzaBlock title="Мексиканская"  price={500}/>
+            <PizzaBlock />
           </div>
         </div>
       </div>
