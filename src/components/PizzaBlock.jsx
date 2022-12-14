@@ -1,4 +1,12 @@
+import { useState } from 'react';
+
 function PizzaBlock({ title = 'Чизбургер-пицца', price = 395 }) {
+  const [count, setCount] = useState(0);
+
+  const handleCounter = () => {
+    setCount((prevState) => prevState + 1);
+  };
+
   return (
     <div className="pizza-block">
       <img
@@ -20,7 +28,7 @@ function PizzaBlock({ title = 'Чизбургер-пицца', price = 395 }) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <div className="button button--outline button--add">
+        <div className="button button--outline button--add" onClick={handleCounter}>
           <svg
             width="12"
             height="12"
@@ -33,7 +41,7 @@ function PizzaBlock({ title = 'Чизбургер-пицца', price = 395 }) {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          <i>{count}</i>
         </div>
       </div>
     </div>
