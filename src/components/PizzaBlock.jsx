@@ -28,7 +28,7 @@ function PizzaBlock({ title = 'Чизбургер-пицца', price = 395 }) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <div className="button button--outline button--add" onClick={handleCounter}>
+        <button className="button button--outline button--add" onClick={handleCounter}>
           <svg
             width="12"
             height="12"
@@ -42,7 +42,7 @@ function PizzaBlock({ title = 'Чизбургер-пицца', price = 395 }) {
           </svg>
           <span>Добавить</span>
           <i>{count}</i>
-        </div>
+        </button>
       </div>
     </div>
   );
