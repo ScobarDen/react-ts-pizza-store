@@ -52,7 +52,11 @@ function Header() {
 }
 
 function App() {
-  return <Header />;
+  return (
+    <div className="wrapper">
+      <Header />
+    </div>
+  );
 }
 
 export default App;
