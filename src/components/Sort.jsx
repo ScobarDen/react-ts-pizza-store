@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
-function Sort() {
+function Sort({ selectedIndex, setSelectedIndex }) {
   const [open, setOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const list = ['популярности', 'цене', 'алфавиту'];
   const sortName = list[selectedIndex];
 
