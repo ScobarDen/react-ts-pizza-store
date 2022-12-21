@@ -21,6 +21,18 @@
   height: 20px;
   opacity: 0.3;
   position: absolute;
-  top: 25%;
+  top: 12px;
   left: 10px;
+}
+
+.iconDelete {
+  height: 20px;
+  opacity: 0.3;
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  cursor: pointer;
+  &:hover{
+    opacity: 1;
+  }
 }

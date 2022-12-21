@@ -1,11 +1,25 @@
 import styles from './Search.module.scss';
-import icon from '../../assets/img/search_icon.svg';
+import searchIcon from '../../assets/img/search_icon.svg';
+import deleteIcon from '../../assets/img/delete_icon.svg';
 
-function Search() {
+function Search({ searchValue, setSearchValue }) {
   return (
     <div className={styles.root}>
-      <img src={icon} className={styles.icon} alt="search icon"/>
-      <input className={styles.input} placeholder="Поиск пиццы..." />
+      <img src={searchIcon} className={styles.icon} alt="search icon" />
+      <input
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+        className={styles.input}
+        placeholder="Поиск пиццы..."
+      />
+      {searchValue && (
+        <img
+          onClick={() => setSearchValue('')}
+          src={deleteIcon}
+          className={styles.iconDelete}
+          alt="deleteIcon"
+        />
+      )}
     </div>
   );
 }
