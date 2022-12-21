@@ -3,6 +3,7 @@ import Sort from '../components/Sort';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import PizzaBlock from '../components/PizzaBlock';
 import { useEffect, useState } from 'react';
+import Pagination from '../components/Pagination';
 
 function Home({ searchValue }) {
   const [items, setItems] = useState([]);
@@ -44,6 +45,7 @@ function Home({ searchValue }) {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : pizzas}</div>
+      <Pagination itemsPerPage={pizzas} />
     </div>
   );
 }
