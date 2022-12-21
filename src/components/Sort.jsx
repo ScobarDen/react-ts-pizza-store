@@ -1,9 +1,15 @@
 import { useState } from 'react';
 
-function Sort({ selectedIndex, setSelectedIndex }) {
+function Sort({ selectedISortType, setSelectedIndex }) {
   const [open, setOpen] = useState(false);
-  const list = ['популярности', 'цене', 'алфавиту'];
-  const sortName = list[selectedIndex];
+  const list = [
+    { name: 'популярности', sort: 'rating' },
+    { name: 'цене', sort: 'price' },
+    {
+      name: 'алфавиту',
+      sort: 'alphabet',
+    },
+  ];
 
   const onClickSelectedItem = (i) => {
     setSelectedIndex(i);
@@ -25,7 +31,7 @@ function Sort({ selectedIndex, setSelectedIndex }) {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{sortName}</span>
+        <span onClick={() => setOpen(!open)}>{selectedISortType.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
@@ -33,9 +39,9 @@ function Sort({ selectedIndex, setSelectedIndex }) {
             {list.map((item, index) => (
               <li
                 key={index}
-                className={selectedIndex === index ? 'active' : ''}
-                onClick={() => onClickSelectedItem(index)}>
-                {item}
+                className={selectedISortType.sort === item.sort ? 'active' : ''}
+                onClick={() => onClickSelectedItem(item)}>
+                {item.name}
               </li>
             ))}
           </ul>
