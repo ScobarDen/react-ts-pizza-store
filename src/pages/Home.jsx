@@ -30,10 +30,6 @@ function Home({ searchValue }) {
     window.scroll(0, 0);
   }, [activeIndexCategory, selectedSortType, searchValue]);
 
-  // const filteredPizzas = searchValue
-  //   ? items.filter((pizza) => pizza?.title.toLowerCase().includes(searchValue.trim().toLowerCase()))
-  //   : items;
-
   const pizzas = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
   const skeletons = [...new Array(9)].map((_, i) => <Skeleton key={i} />);
 

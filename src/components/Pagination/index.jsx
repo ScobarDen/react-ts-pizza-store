@@ -31,11 +31,11 @@ function Pagination({ itemsPerPage }) {
   return (
         <ReactPaginate className={styles.root}
             breakLabel="..."
-            nextLabel=">"
+            nextLabel="&raquo;"
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={4}
-            previousLabel="<"
+            previousLabel="&laquo;"
             renderOnZeroPageCount={null}
         />
   );
