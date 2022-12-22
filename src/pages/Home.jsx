@@ -22,7 +22,7 @@ function Home({ searchValue }) {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`https://63a096f1e3113e5a5c41fd8d.mockapi.io/items?page=${currentPage}&limit=4${category}${sortBy}${search}`)
+    fetch(`https://63a096f1e3113e5a5c41fd8d.mockapi.io/items?${category}${sortBy}${search}&page=${currentPage}&limit=4`)
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
