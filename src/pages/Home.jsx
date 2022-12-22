@@ -5,12 +5,13 @@ import PizzaBlock from '../components/PizzaBlock';
 import { useContext, useEffect, useState } from 'react';
 import Pagination from '../components/Pagination';
 import { AppContext } from '../App';
-import {useSelector} from "react-redux";
+import { useSelector } from 'react-redux';
+import { selectFilter } from '../redux/slices/filterSlice';
 
 function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { indexOfCategory, sortType } = useSelector((state) => state.filter);
+  const { indexOfCategory, sortType } = useSelector(selectFilter);
   const [currentPage, setCurrentPage] = useState(1);
   const { searchValue } = useContext(AppContext);
 
@@ -37,8 +38,8 @@ function Home() {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories/>
-        <Sort/>
+        <Categories />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : pizzas}</div>

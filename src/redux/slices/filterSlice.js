@@ -6,7 +6,7 @@ const initialState = {
     name: 'популярности',
     sort: 'rating',
     order: 'asc',
-  }
+  },
 };
 
 export const filterSlice = createSlice({
@@ -23,5 +23,7 @@ export const filterSlice = createSlice({
 });
 
 export const { setIndexOfCategory, setSortType } = filterSlice.actions;
+
+export const selectFilter = (state) => state.filter;
 
 export default filterSlice.reducer;

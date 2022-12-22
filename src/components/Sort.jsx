@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSortType } from '../redux/slices/filterSlice';
+import { selectFilter, setSortType } from '../redux/slices/filterSlice';
 
 function Sort() {
   const [open, setOpen] = useState(false);
@@ -12,7 +12,7 @@ function Sort() {
       sort: 'alphabet',
     },
   ];
-  const { sortType } = useSelector((state) => state.filter);
+  const { sortType } = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const onClickSelectedItem = (i) => {
