@@ -6,12 +6,12 @@ import { useContext, useEffect, useState } from 'react';
 import Pagination from '../components/Pagination';
 import { AppContext } from '../App';
 import { useSelector } from 'react-redux';
-import { selectFilter } from '../redux/slices/filterSlice';
+import { statesOfFilters } from '../redux/slices/filterSlice';
 
 function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { indexOfCategory, sortType } = useSelector(selectFilter);
+  const { indexOfCategory, sortType } = useSelector(statesOfFilters);
   const [currentPage, setCurrentPage] = useState(1);
   const { searchValue } = useContext(AppContext);
 
