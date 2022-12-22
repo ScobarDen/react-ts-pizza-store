@@ -2,10 +2,11 @@ import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import PizzaBlock from '../components/PizzaBlock';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Pagination from '../components/Pagination';
+import { AppContext } from '../App';
 
-function Home({ searchValue }) {
+function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [activeIndexCategory, setActiveIndexCategory] = useState(0);
@@ -13,23 +14,26 @@ function Home({ searchValue }) {
     name: 'популярности',
     sort: 'rating',
   });
-    const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { searchValue } = useContext(AppContext);
 
-    const category = activeIndexCategory ? `category=${activeIndexCategory}` : '';
+  const category = activeIndexCategory ? `category=${activeIndexCategory}` : '';
   const orderSort = 'asc';
   const sortBy = `&sortBy=${selectedSortType.sort}&order=${orderSort}`;
   const search = searchValue ? `&search=${searchValue}` : '';
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`https://63a096f1e3113e5a5c41fd8d.mockapi.io/items?${category}${sortBy}${search}&page=${currentPage}&limit=4`)
+    fetch(
+      `https://63a096f1e3113e5a5c41fd8d.mockapi.io/items?${category}${sortBy}${search}&page=${currentPage}&limit=4`,
+    )
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
         setIsLoading(false);
       });
     window.scroll(0, 0);
-  }, [activeIndexCategory, selectedSortType, searchValue, currentPage]);
+  }, [activeIndexCategory, selectedSortType, searchValue, currentPage, category, search, sortBy]);
 
   const pizzas = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
   const skeletons = [...new Array(9)].map((_, i) => <Skeleton key={i} />);
