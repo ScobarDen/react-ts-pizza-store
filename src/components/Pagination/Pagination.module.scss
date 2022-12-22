@@ -17,16 +17,23 @@
     font-weight: bold;
     font-size: 20px;
     text-align: center;
-    height: 30px;
+    height: 100%;
+    width: 100%;
+    padding-top: 20%;
   }
 
-  li.active {
-    background-color: #fe5f1e;
-    color: white;
-  }
 
-  li:hover:not(.active) {
-    background-color: #f3f3f3;
-    cursor: pointer;
+
+  :global {
+    .selected{
+      background-color: #fe5f1e;
+      a {
+        color: white;
+      }
+    }
+    li:hover:not(.selected) {
+      background-color: #f3f3f3;
+      cursor: pointer;
+    }
   }
 }
