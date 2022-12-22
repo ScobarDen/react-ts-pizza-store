@@ -5,21 +5,17 @@ import PizzaBlock from '../components/PizzaBlock';
 import { useContext, useEffect, useState } from 'react';
 import Pagination from '../components/Pagination';
 import { AppContext } from '../App';
+import {useSelector} from "react-redux";
 
 function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [activeIndexCategory, setActiveIndexCategory] = useState(0);
-  const [selectedSortType, setSelectedSortType] = useState({
-    name: 'популярности',
-    sort: 'rating',
-  });
+  const { indexOfCategory, sortType } = useSelector((state) => state.filter);
   const [currentPage, setCurrentPage] = useState(1);
   const { searchValue } = useContext(AppContext);
 
-  const category = activeIndexCategory ? `category=${activeIndexCategory}` : '';
-  const orderSort = 'asc';
-  const sortBy = `&sortBy=${selectedSortType.sort}&order=${orderSort}`;
+  const category = indexOfCategory ? `category=${indexOfCategory}` : '';
+  const sortBy = `&sortBy=${sortType.sort}&order=${sortType.order}`;
   const search = searchValue ? `&search=${searchValue}` : '';
 
   useEffect(() => {
@@ -33,7 +29,7 @@ function Home() {
         setIsLoading(false);
       });
     window.scroll(0, 0);
-  }, [activeIndexCategory, selectedSortType, searchValue, currentPage, category, search, sortBy]);
+  }, [indexOfCategory, sortType, searchValue, currentPage, category, search, sortBy]);
 
   const pizzas = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
   const skeletons = [...new Array(9)].map((_, i) => <Skeleton key={i} />);
@@ -41,8 +37,8 @@ function Home() {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories activeIndex={activeIndexCategory} setActiveIndex={setActiveIndexCategory} />
-        <Sort selectedISortType={selectedSortType} setSelectedIndex={setSelectedSortType} />
+        <Categories/>
+        <Sort/>
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : pizzas}</div>
