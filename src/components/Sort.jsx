@@ -15,8 +15,8 @@ function Sort() {
   const { sortType } = useSelector(statesOfFilters);
   const dispatch = useDispatch();
 
-  const onClickSelectedItem = (i) => {
-    dispatch(setSortType(i));
+  const onClickSelectedItem = (obj) => {
+    dispatch(setSortType(obj));
     setOpen(false);
   };
 
