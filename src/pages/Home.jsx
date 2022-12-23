@@ -7,6 +7,7 @@ import Pagination from '../components/Pagination';
 import { AppContext } from '../App';
 import { useSelector } from 'react-redux';
 import { statesOfFilters } from '../redux/slices/filterSlice';
+import axios from 'axios';
 
 function Home() {
   const [items, setItems] = useState([]);
@@ -21,12 +22,20 @@ function Home() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(
-      `https://63a096f1e3113e5a5c41fd8d.mockapi.io/items?${category}${sortBy}${search}&page=${currentPage}&limit=4`,
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setItems(data);
+    // fetch(
+    //   `https://63a096f1e3113e5a5c41fd8d.mockapi.io/items?${category}${sortBy}${search}&page=${currentPage}&limit=4`,
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setItems(data);
+    //     setIsLoading(false);
+    //   });
+    axios
+      .get(
+        `https://63a096f1e3113e5a5c41fd8d.mockapi.io/items?${category}${sortBy}${search}&page=${currentPage}&limit=4`,
+      )
+      .then((res) => {
+        setItems(res.data);
         setIsLoading(false);
       });
     window.scroll(0, 0);
