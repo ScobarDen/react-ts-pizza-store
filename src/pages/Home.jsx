@@ -16,20 +16,15 @@ function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const { searchValue } = useContext(AppContext);
 
-  const category = indexOfCategory ? `category=${indexOfCategory}` : '';
-  const sortBy = `&sortBy=${sortType.sort}&order=${sortType.order}`;
-  const search = searchValue ? `&search=${searchValue}` : '';
+
 
   useEffect(() => {
     setIsLoading(true);
-    // fetch(
-    //   `https://63a096f1e3113e5a5c41fd8d.mockapi.io/items?${category}${sortBy}${search}&page=${currentPage}&limit=4`,
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setItems(data);
-    //     setIsLoading(false);
-    //   });
+
+    const category = indexOfCategory ? `category=${indexOfCategory}` : '';
+    const sortBy = `&sortBy=${sortType.sort}&order=${sortType.order}`;
+    const search = searchValue ? `&search=${searchValue}` : '';
+
     axios
       .get(
         `https://63a096f1e3113e5a5c41fd8d.mockapi.io/items?${category}${sortBy}${search}&page=${currentPage}&limit=4`,
@@ -39,7 +34,7 @@ function Home() {
         setIsLoading(false);
       });
     window.scroll(0, 0);
-  }, [indexOfCategory, sortType, searchValue, currentPage, category, search, sortBy]);
+  }, [indexOfCategory, sortType, searchValue, currentPage]);
 
   const pizzas = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
   const skeletons = [...new Array(9)].map((_, i) => <Skeleton key={i} />);
