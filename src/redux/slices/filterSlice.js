@@ -23,10 +23,17 @@ export const filterSlice = createSlice({
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
     },
+    setFilterSlice: (state, action) => {
+      state.indexOfCategory = Number(action.payload.category);
+      state.sortType.sort = action.payload.sort.sort;
+      state.sortType.name = action.payload.sort.name;
+      state.sortType.order = action.payload.order;
+      state.currentPage = Number(action.payload.page);
+    },
   },
 });
 
-export const { setIndexOfCategory, setSortType, setCurrentPage } = filterSlice.actions;
+export const { setIndexOfCategory, setSortType, setCurrentPage, setFilterSlice } = filterSlice.actions;
 
 export const statesOfFilters = (state) => state.filter;
 
