@@ -12,8 +12,7 @@ import axios from 'axios';
 function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { indexOfCategory, sortType } = useSelector(statesOfFilters);
-  const [currentPage, setCurrentPage] = useState(1);
+  const { indexOfCategory, sortType, currentPage } = useSelector(statesOfFilters);
   const { searchValue } = useContext(AppContext);
 
 
@@ -47,7 +46,7 @@ function Home() {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : pizzas}</div>
-      <Pagination onPageChange={setCurrentPage} />
+      <Pagination/>
     </div>
   );
 }

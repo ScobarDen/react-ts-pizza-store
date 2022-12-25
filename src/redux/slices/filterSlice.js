@@ -7,6 +7,7 @@ const initialState = {
     sort: 'rating',
     order: 'asc',
   },
+  currentPage: 1,
 };
 
 export const filterSlice = createSlice({
@@ -19,10 +20,13 @@ export const filterSlice = createSlice({
     setSortType: (state, action) => {
       state.sortType = action.payload;
     },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
   },
 });
 
-export const { setIndexOfCategory, setSortType } = filterSlice.actions;
+export const { setIndexOfCategory, setSortType, setCurrentPage } = filterSlice.actions;
 
 export const statesOfFilters = (state) => state.filter;
 
