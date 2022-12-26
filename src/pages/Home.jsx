@@ -55,12 +55,12 @@ function Home() {
 
   useEffect(() => {
     window.scroll(0, 0);
-    if (!isSearch.current){
+    const categoryAll = qs.parse(window.location.search.substring(1))?.category;
+    if (!isSearch.current || !Number(categoryAll)){
       fetchPizzas();
     }
 
     isSearch.current = false;
-    console.log(indexOfCategory)
   }, [indexOfCategory, sortType, searchValue, currentPage]);
 
   useEffect(() => {
