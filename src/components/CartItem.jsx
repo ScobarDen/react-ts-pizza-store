@@ -1,20 +1,24 @@
+import { useDispatch } from 'react-redux';
+import { addItem, removeItem, removeOneItem } from '../redux/slices/cartSlice';
+
 function CartItem({ id, title, price, imageUrl, type, size, count }) {
-    const sizes = [26, 30, 40];
+  const sizes = [26, 30, 40];
+  const dispatch = useDispatch();
   return (
     <div className="cart__item">
       <div className="cart__item-img">
-        <img
-          className="pizza-block__image"
-          src={imageUrl}
-          alt="Pizza"
-        />
+        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
       </div>
       <div className="cart__item-info">
         <h3>{title}</h3>
-        <p>{type} тесто, {sizes[size]} см.</p>
+        <p>
+          {type} тесто, {sizes[size]} см.
+        </p>
       </div>
       <div className="cart__item-count">
-        <div className="button button--outline button--circle cart__item-count-minus">
+        <div
+          className="button button--outline button--circle cart__item-count-minus"
+          onClick={() => dispatch(removeOneItem(id))}>
           <svg
             width="10"
             height="10"
@@ -31,8 +35,10 @@ function CartItem({ id, title, price, imageUrl, type, size, count }) {
             />
           </svg>
         </div>
-        <b>2</b>
-        <div className="button button--outline button--circle cart__item-count-plus">
+        <b>{count}</b>
+        <div
+          className="button button--outline button--circle cart__item-count-plus"
+          onClick={() => dispatch(addItem({ id }))}>
           <svg
             width="10"
             height="10"
@@ -53,7 +59,7 @@ function CartItem({ id, title, price, imageUrl, type, size, count }) {
       <div className="cart__item-price">
         <b>{price * count} ₽</b>
       </div>
-      <div className="cart__item-remove">
+      <div className="cart__item-remove" onClick={() => dispatch(removeItem(id))}>
         <div className="button button--outline button--circle">
           <svg
             width="10"

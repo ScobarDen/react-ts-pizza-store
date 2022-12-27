@@ -10,17 +10,20 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem(state, action) {
-      /*state.items.push(action.payload);
-                              state.totalPrice = state.items.reduce(
-                                (sum, item) => sum + item.price,
-                                0,
-                              );*/
       const findItem = state.items.find((pizzaObject) => pizzaObject.id === action.payload.id);
       findItem ? findItem.count++ : state.items.push({ ...action.payload, count: 1 });
       state.totalPrice = state.items.reduce((sum, item) => sum + item.price * item.count, 0);
     },
     removeItem(state, action) {
-      state.items.filter((obj) => obj.id !== action.payload);
+      state.items = state.items.filter((obj) => obj.id !== action.payload);
+      state.totalPrice = state.items.reduce((sum, item) => sum + item.price * item.count, 0);
+    },
+    removeOneItem(state, action) {
+      const findItem = state.items.find((pizzaObject) => pizzaObject.id === action.payload);
+      findItem.count--;
+      if (findItem.count === 0)
+        state.items = state.items.filter((pizzaObject) => pizzaObject.id !== findItem.id);
+      state.totalPrice = state.items.reduce((sum, item) => sum + item.price * item.count, 0);
     },
     clearItems(state) {
       state.items = [];
@@ -29,7 +32,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, clearItems } = cartSlice.actions;
+export const { addItem, removeItem, clearItems, removeOneItem } = cartSlice.actions;
 
 export const statesOfCart = (state) => state.cart;
 
