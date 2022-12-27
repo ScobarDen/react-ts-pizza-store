@@ -4,7 +4,7 @@ import { clearItems, statesOfCart } from '../redux/slices/cartSlice';
 import CartItem from "../components/CartItem";
 
 function Cart() {
-  const { items, totalPrice } = useSelector(statesOfCart);
+  const { items, totalPrice, totalCount } = useSelector(statesOfCart);
   const dispatch = useDispatch();
 
   return (
@@ -95,7 +95,7 @@ function Cart() {
             <span>
               {' '}
               Всего пицц: <b>
-                {items.reduce((prev, pizzaObj) => prev + pizzaObj.count, 0)} шт.
+                {totalCount} шт.
               </b>{' '}
             </span>
             <span>
