@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearItems, statesOfCart } from '../redux/slices/cartSlice';
-import CartItem from "../components/CartItem";
+import CartItem from '../components/CartItem';
+import CartEmpty from '../components/CartEmpty';
 
 function Cart() {
   const { items, totalPrice, totalCount } = useSelector(statesOfCart);
   const dispatch = useDispatch();
+
+  if (!items.length) return <CartEmpty />;
 
   return (
     <div className="container container--cart">
@@ -42,12 +45,7 @@ function Cart() {
             </svg>
             Корзина
           </h2>
-          <div
-            className="cart__clear"
-            onClick={() => {
-              console.log(1)
-              dispatch(clearItems());
-            }}>
+          <div className="cart__clear" onClick={() => dispatch(clearItems())}>
             <svg
               width="20"
               height="20"
@@ -88,15 +86,15 @@ function Cart() {
           </div>
         </div>
         <div className="content__items">
-          {items.map(item => <CartItem key={item.id} {...item}/>)}
+          {items.map((item) => (
+            <CartItem key={item.id} {...item} />
+          ))}
         </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">
             <span>
               {' '}
-              Всего пицц: <b>
-                {totalCount} шт.
-              </b>{' '}
+              Всего пицц: <b>{totalCount} шт.</b>{' '}
             </span>
             <span>
               {' '}
