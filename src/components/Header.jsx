@@ -51,7 +51,7 @@ function Header() {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>{items.reduce((prev,pizzaObj)=>prev + pizzaObj.count,0)}</span>
+            <span>{items.reduce((prev, pizzaObj) => prev + pizzaObj.count, 0)}</span>
           </Link>
         </div>
       </div>
