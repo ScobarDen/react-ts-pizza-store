@@ -12,7 +12,7 @@ function CartItem({ id, title, price, imageUrl, type, size, count }) {
       <div className="cart__item-info">
         <h3>{title}</h3>
         <p>
-          {type} тесто, {sizes[size]} см.
+          {type} тесто, {size} см.
         </p>
       </div>
       <div className="cart__item-count">
