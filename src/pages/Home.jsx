@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
 import { setFilterSlice, statesOfFilters } from '../redux/slices/filterSlice';
 import { AppContext } from '../App';
@@ -74,16 +74,12 @@ function Home() {
 
   return (
     <div className="container">
-      {status === ERROR ? (
+      {status === ERROR || !pizzasItems.length ? (
         <div className="cart cart--empty">
           <h2>
-            Пицц нет <span>😕</span>
+            По вашему запросу пицц нет <span>😕</span>
           </h2>
-          <p>
-            Вероятней всего произошла какая-то ошибка.
-            <br />
-            Для того, чтобы заказать пиццу, вернитесь попозже.
-          </p>
+          {status === ERROR && <p>Произошла ошибка доступа к серверу</p>}
           <img src={cartEmptyImg} alt="Empty cart" />
         </div>
       ) : (
