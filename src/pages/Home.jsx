@@ -2,21 +2,21 @@ import { useContext, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
-import { setFilterSlice, statesOfFilters } from '../redux/slices/filterSlice';
+import { setFilterSlice, selectFilters } from '../redux/slices/filterSlice';
 import { AppContext } from '../App';
 import Categories from '../components/Categories';
 import Sort, { list } from '../components/Sort';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import PizzaBlock from '../components/PizzaBlock';
 import Pagination from '../components/Pagination';
-import { ERROR, fetchPizzasItems, LOADING, statesOfPizzas } from '../redux/slices/pizzasSlice';
+import { ERROR, fetchPizzasItems, LOADING, selectPizzas } from '../redux/slices/pizzasSlice';
 import cartEmptyImg from '../assets/img/empty-cart.png';
 
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { indexOfCategory, sortType, currentPage } = useSelector(statesOfFilters);
-  const { pizzasItems, status } = useSelector(statesOfPizzas);
+  const { indexOfCategory, sortType, currentPage } = useSelector(selectFilters);
+  const { pizzasItems, status } = useSelector(selectPizzas);
   const { searchValue } = useContext(AppContext);
   const limit = 4;
   const isSearch = useRef(false);
