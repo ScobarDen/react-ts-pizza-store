@@ -1,9 +1,8 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
 import { setFilterSlice, selectFilters } from '../redux/slices/filterSlice';
-import { AppContext } from '../App';
 import Categories from '../components/Categories';
 import Sort, { list } from '../components/Sort';
 import Skeleton from '../components/PizzaBlock/Skeleton';
@@ -15,9 +14,8 @@ import cartEmptyImg from '../assets/img/empty-cart.png';
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { indexOfCategory, sortType, currentPage } = useSelector(selectFilters);
+  const { indexOfCategory, sortType, currentPage, searchValue } = useSelector(selectFilters);
   const { pizzasItems, status } = useSelector(selectPizzas);
-  const { searchValue } = useContext(AppContext);
   const limit = 4;
   const isSearch = useRef(false);
   const isMounted = useRef(false);
