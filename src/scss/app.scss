@@ -14,6 +14,10 @@ body {
   margin: 50px auto;
   border-radius: 10px;
   max-width: 1400px;
+  @media (max-width: 500px) {
+    min-width: 330px;
+    margin: 20px auto;
+  }
 }
 
 .content {
@@ -308,8 +312,9 @@ body {
 
   &--empty {
     margin: 60px auto;
-    width: 560px;
+    max-width: 560px;
     text-align: center;
+    padding: 10px;
 
     h2 {
       font-size: 32px;
@@ -330,8 +335,11 @@ body {
 
     img {
       display: block;
-      width: 300px;
+      max-width: 300px;
       margin: 45px auto 60px;
+      @media (max-width: 500px) {
+        width: 200px;
+      }
     }
 
     .button--black {
