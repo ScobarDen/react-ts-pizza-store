@@ -22,21 +22,24 @@ function Home() {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const fetchPizzas = () => {
+  const fetchPizzas = async () => {
     setIsLoading(true);
 
     const category = indexOfCategory ? `category=${indexOfCategory}` : '';
     const sortBy = `&sortBy=${sortType.sort}&order=${sortType.order}`;
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    axios
-      .get(
-        `https://63a096f1e3113e5a5c41fd8d.mockapi.io/items?${category}${sortBy}${search}&page=${currentPage}&limit=${limit}`,
-      )
-      .then((res) => {
-        setItems(res.data);
-        setIsLoading(false);
-      });
+    try {
+      const res = await axios.get(
+          `https://63a096f1e3113e5a5c41fd8d.mockapi.io/items?${category}${sortBy}${search}&page=${currentPage}&limit=${limit}`,
+      );
+      setItems(res.data);
+    } catch (e) {
+      console.log(e.message);
+    } finally {
+      setIsLoading(false);
+    }
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {
@@ -56,7 +59,7 @@ function Home() {
   useEffect(() => {
     window.scroll(0, 0);
     const categoryAll = qs.parse(window.location.search.substring(1))?.category;
-    if (!isSearch.current || !Number(categoryAll)){
+    if (!isSearch.current || !Number(categoryAll)) {
       fetchPizzas();
     }
 
@@ -64,7 +67,7 @@ function Home() {
   }, [indexOfCategory, sortType, searchValue, currentPage]);
 
   useEffect(() => {
-    if (isMounted.current){
+    if (isMounted.current) {
       const queryString = qs.stringify({
         category: indexOfCategory,
         sortBy: sortType.sort,
