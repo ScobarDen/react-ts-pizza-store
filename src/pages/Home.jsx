@@ -74,12 +74,12 @@ function Home() {
 
   return (
     <div className="container">
-      {status === ERROR || !pizzasItems.length ? (
+      {status === ERROR ? (
         <div className="cart cart--empty">
           <h2>
             По вашему запросу пицц нет <span>😕</span>
           </h2>
-          {status === ERROR && <p>Произошла ошибка доступа к серверу</p>}
+          <p>Произошла ошибка доступа к серверу</p>
           <img src={cartEmptyImg} alt="Empty cart" />
         </div>
       ) : (

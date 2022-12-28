@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const { LOADING, SUCCESS, ERROR } = { LOADING: 'loading', SUCCESS: 'success', ERROR: 'error' };
+export const { LOADING, SUCCESS, ERROR } = {
+  LOADING: 'loading',
+  SUCCESS: 'success',
+  ERROR: 'error',
+};
 
 export const fetchPizzasItems = createAsyncThunk(
   'pizzas/fetchPizzasItemsStatus',
