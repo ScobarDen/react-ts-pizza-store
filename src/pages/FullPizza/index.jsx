@@ -25,7 +25,14 @@ function FullPizza() {
 
   return (
     <div>
-
+      <div><img src={imageUrl} alt="pi"/></div>
+      <div>
+        <h1>{title}</h1>
+        <p>Цена: {price}</p>
+        <p>Размеры: {sizes}</p>
+        <p>Типы: {types}</p>
+        <p>Рейтинг: {rating}</p>
+      </div>
     </div>
   );
 }
