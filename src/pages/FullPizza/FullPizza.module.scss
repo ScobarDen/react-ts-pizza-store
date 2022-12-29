@@ -1,38 +1,44 @@
-.root{
- width: 90%;
+.root {
+  width: 90%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 
 
-  img{
+  img {
     width: 50%;
     min-width: 300px;
   }
 
-  h1{
+  h1 {
     margin-bottom: 30px;
   }
 
-  .price{
+  .price {
     font-weight: bold;
     font-size: 32px;
     letter-spacing: 0.015em;
     margin-right: 50px;
   }
 
-  .right{
+  .right {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
-  .bottom{
+  .bottom {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
   }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 

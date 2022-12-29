@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styles from './FullPizza.module.scss';
+import { TailSpin } from 'react-loader-spinner';
 
 function FullPizza() {
   const { id } = useParams();
@@ -23,7 +24,21 @@ function FullPizza() {
     fetchPizza();
   }, [id]);
 
-  if (!pizza.sizes) return 'Loading...';
+  if (!pizza.sizes)
+    return (
+      <div className={styles.loader}>
+        <TailSpin
+          height="300"
+          width="300"
+          color="#fe5f1e"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
 
   return (
     <div className={styles.root}>
@@ -31,8 +46,18 @@ function FullPizza() {
       <div className={styles.right}>
         <div>
           <h1>{pizza.title}</h1>
-          <h3>Размеры: {pizza.sizes.map(size => <span key={size}>{size} см </span>)}</h3>
-          <h3>Типы: {pizza.types.map(type => <span key={type}>{typeNames[type]} тесто </span>)}</h3>
+          <h3>
+            Размеры:{' '}
+            {pizza.sizes.map((size) => (
+              <span key={size}>{size} см </span>
+            ))}
+          </h3>
+          <h3>
+            Типы:{' '}
+            {pizza.types.map((type) => (
+              <span key={type}>{typeNames[type]} тесто </span>
+            ))}
+          </h3>
           <h2>Рейтинг: {pizza.rating}</h2>
         </div>
         <div className={styles.bottom}>
