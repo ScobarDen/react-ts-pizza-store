@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styles from './FullPizza.module.scss';
@@ -7,6 +7,7 @@ import { TailSpin } from 'react-loader-spinner';
 function FullPizza() {
   const { id } = useParams();
   const [pizza, setPizza] = useState({});
+  const navigate = useNavigate();
   const typeNames = ['тонкое', 'традиционное'];
 
   useEffect(() => {
@@ -16,8 +17,12 @@ function FullPizza() {
           `https://63a096f1e3113e5a5c41fd8d.mockapi.io/items?id=${id}`,
         );
         setPizza(data[0]);
+        if (!data.length) {
+          throw new Error(`Пиццы с id = ${id} не существует`);
+        }
       } catch (e) {
-        // console.log(e.message);
+        console.error(e.message);
+        navigate('/');
       }
     }
 
