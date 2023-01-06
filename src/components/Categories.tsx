@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {selectFilters, setIndexOfCategory} from '../redux/slices/filterSlice';
+import { selectFilters, setIndexOfCategory } from '../redux/slices/filterSlice';
+import React from "react";
 
-function Categories() {
-  const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+const Categories: React.FC = () => {
+  const categories: string[] = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
   const { indexOfCategory } = useSelector(selectFilters);
   const dispatch = useDispatch();
 
-  const onClickCategory = (i) => {
+  const onClickCategory = (i: number) => {
     dispatch(setIndexOfCategory(i));
   };
 
