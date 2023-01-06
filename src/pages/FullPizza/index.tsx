@@ -1,12 +1,19 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './FullPizza.module.scss';
 import { TailSpin } from 'react-loader-spinner';
 
-function FullPizza() {
+const FullPizza: React.FC = () => {
   const { id } = useParams();
-  const [pizza, setPizza] = useState({});
+  const [pizza, setPizza] = useState<{
+    imageUrl: string,
+    sizes: number[],
+    rating: number,
+    types: number[],
+    title: string,
+    price: number
+  }>();
   const navigate = useNavigate();
   const typeNames = ['тонкое', 'традиционное'];
 
@@ -21,7 +28,7 @@ function FullPizza() {
           throw new Error(`Пиццы с id = ${id} не существует`);
         }
       } catch (e) {
-        console.error(e.message);
+        console.error((e as Error).message);
         navigate('/');
       }
     }
@@ -29,7 +36,7 @@ function FullPizza() {
     fetchPizza();
   }, [id]);
 
-  if (!pizza.sizes)
+  if (!pizza)
     return (
       <div className={styles.loader}>
         <TailSpin
@@ -74,6 +81,6 @@ function FullPizza() {
       </div>
     </div>
   );
-}
+};
 
 export default FullPizza;
