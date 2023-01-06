@@ -17,8 +17,8 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, siz
 
   const { count } = useSelector(selectCartItemById(id)) || { count: 0 };
   const dispatch = useDispatch();
-  const [activeIndexOfSize, setActiveIndexOfSize] = useState(0);
-  const [activeIndexOfType, setActiveIndexOfType] = useState(0);
+  const [activeIndexOfSize, setActiveIndexOfSize] = useState<number>(0);
+  const [activeIndexOfType, setActiveIndexOfType] = useState<number>(0);
 
   const onClickSize = (i: number) => {
     setActiveIndexOfSize(i);
