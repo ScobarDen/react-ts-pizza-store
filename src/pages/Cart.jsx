@@ -4,7 +4,7 @@ import { clearItems, selectCart } from '../redux/slices/cartSlice';
 import CartItem from '../components/CartItem';
 import CartEmpty from '../components/CartEmpty';
 
-function Cart() {
+const Cart = () => {
   const { items, totalPrice, totalCount } = useSelector(selectCart);
   const dispatch = useDispatch();
 
@@ -128,6 +128,6 @@ function Cart() {
       </div>
     </div>
   );
-}
+};
 
 export default Cart;

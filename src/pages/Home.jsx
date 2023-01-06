@@ -11,7 +11,7 @@ import Pagination from '../components/Pagination';
 import { ERROR, fetchPizzasItems, LOADING, selectPizzas } from '../redux/slices/pizzasSlice';
 import cartEmptyImg from '../assets/img/empty-cart.png';
 
-function Home() {
+const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { indexOfCategory, sortType, currentPage, searchValue } = useSelector(selectFilters);
@@ -93,6 +93,6 @@ function Home() {
       )}
     </div>
   );
-}
+};
 
 export default Home;
