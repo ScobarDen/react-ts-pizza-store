@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
@@ -11,7 +11,7 @@ import Pagination from '../components/Pagination';
 import { ERROR, fetchPizzasItems, LOADING, selectPizzas } from '../redux/slices/pizzasSlice';
 import cartEmptyImg from '../assets/img/empty-cart.png';
 
-const Home = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { indexOfCategory, sortType, currentPage, searchValue } = useSelector(selectFilters);
@@ -25,6 +25,7 @@ const Home = () => {
     const sortBy = `&sortBy=${sortType.sort}&order=${sortType.order}`;
     const search = searchValue ? `&search=${searchValue}` : '';
 
+    // @ts-ignore
     dispatch(fetchPizzasItems({ category, sortBy, search, currentPage, limit }));
     window.scrollTo(0, 0);
   };
@@ -67,7 +68,7 @@ const Home = () => {
     isMounted.current = true;
   }, [indexOfCategory, sortType, searchValue, currentPage]);
 
-  const pizzas = pizzasItems.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
+  const pizzas = pizzasItems.map((pizza: any) => <PizzaBlock key={pizza.id} {...pizza} />);
   const skeletons = [...new Array(9)].map((_, i) => <Skeleton key={i} />);
 
   return (
