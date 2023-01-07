@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
 import { setFilterSlice, selectFilters } from '../redux/slices/filterSlice';
@@ -10,13 +10,14 @@ import PizzaBlock from '../components/PizzaBlock';
 import Pagination from '../components/Pagination';
 import { fetchPizzasItems, selectPizzas, StatusFetch } from '../redux/slices/pizzasSlice';
 import cartEmptyImg from '../assets/img/empty-cart.png';
+import { useAppDispatch } from '../redux/store';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { indexOfCategory, sortType, currentPage, searchValue } = useSelector(selectFilters);
   const { pizzasItems, status } = useSelector(selectPizzas);
-  const limit = 4;
+  const limit = '4';
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
@@ -25,7 +26,6 @@ const Home: React.FC = () => {
     const sortBy = `&sortBy=${sortType.sort}&order=${sortType.order}`;
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    // @ts-ignore
     dispatch(fetchPizzasItems({ category, sortBy, search, currentPage, limit }));
     window.scrollTo(0, 0);
   };

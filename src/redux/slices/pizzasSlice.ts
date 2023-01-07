@@ -17,7 +17,15 @@ type PizzaItemState = {
   types: number[];
 };
 
-export const fetchPizzasItems = createAsyncThunk<PizzaItemState[], Record<string, string>>(
+type AsyncParams = {
+  category: string;
+  sortBy: string;
+  search: string;
+  currentPage: number;
+  limit: string;
+};
+
+export const fetchPizzasItems = createAsyncThunk<PizzaItemState[], AsyncParams>(
   'pizzas/fetchPizzasItemsStatus',
   async ({ category, sortBy, search, currentPage, limit }) => {
     const { data } = await axios.get<PizzaItemState[]>(
@@ -26,7 +34,6 @@ export const fetchPizzasItems = createAsyncThunk<PizzaItemState[], Record<string
     return data;
   },
 );
-
 
 interface PizzaSliceState {
   pizzasItems: PizzaItemState[];
