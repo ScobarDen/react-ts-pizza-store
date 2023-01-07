@@ -1,5 +1,6 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {RootState} from "../store";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
+import { getCartFromLocalStorage } from '../../utils/getCartFromLocalStorage';
 
 export type CartItem = {
   id: string;
@@ -18,9 +19,9 @@ interface CartSliceState {
 }
 
 const initialState: CartSliceState = {
-  totalPrice: 0,
-  totalCount: 0,
-  items: [],
+  totalPrice: getCartFromLocalStorage().totalPrice,
+  totalCount: getCartFromLocalStorage().totalCount,
+  items: getCartFromLocalStorage().items,
 };
 
 export const cartSlice = createSlice({
@@ -40,7 +41,7 @@ export const cartSlice = createSlice({
     },
     removeOneItem(state, action: PayloadAction<string>) {
       const findItem = state.items.find((pizzaObject) => pizzaObject.id === action.payload);
-      if (findItem){
+      if (findItem) {
         findItem.count--;
         if (findItem.count === 0) {
           state.items = state.items.filter((pizzaObject) => pizzaObject.id !== findItem.id);
