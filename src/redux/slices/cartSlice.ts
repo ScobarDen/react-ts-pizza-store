@@ -18,10 +18,12 @@ interface CartSliceState {
   items: CartItem[];
 }
 
+const {totalPrice, totalCount, items} = getCartFromLocalStorage();
+
 const initialState: CartSliceState = {
-  totalPrice: getCartFromLocalStorage().totalPrice,
-  totalCount: getCartFromLocalStorage().totalCount,
-  items: getCartFromLocalStorage().items,
+  totalPrice,
+  totalCount,
+  items,
 };
 
 export const cartSlice = createSlice({
