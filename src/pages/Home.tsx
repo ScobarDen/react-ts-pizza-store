@@ -8,7 +8,7 @@ import Sort, { list } from '../components/Sort';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import PizzaBlock from '../components/PizzaBlock';
 import Pagination from '../components/Pagination';
-import { ERROR, fetchPizzasItems, LOADING, selectPizzas } from '../redux/slices/pizzasSlice';
+import { fetchPizzasItems, selectPizzas, StatusFetch } from '../redux/slices/pizzasSlice';
 import cartEmptyImg from '../assets/img/empty-cart.png';
 
 const Home: React.FC = () => {
@@ -73,7 +73,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="container">
-      {status === ERROR ? (
+      {status === StatusFetch.ERROR ? (
         <div className="cart cart--empty">
           <h2>
             По вашему запросу пицц нет <span>😕</span>
@@ -88,7 +88,9 @@ const Home: React.FC = () => {
             <Sort />
           </div>
           <h2 className="content__title">Все пиццы</h2>
-          <div className="content__items">{status === LOADING ? skeletons : pizzas}</div>
+          <div className="content__items">
+            {status === StatusFetch.LOADING ? skeletons : pizzas}
+          </div>
           <Pagination />
         </>
       )}
