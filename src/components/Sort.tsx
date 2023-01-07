@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilters, setSortType } from '../redux/slices/filterSlice';
+import { selectFilters, setSortType, SortEnum } from '../redux/slices/filterSlice';
 
 type SortItem = {
   name: string;
-  sort: 'rating' | 'price' | 'alphabet';
-  order: "asc" | "desc";
+  sort: SortEnum;
+  order: 'asc' | 'desc';
 };
 
 export const list: SortItem[] = [
-  { name: 'популярности', sort: 'rating', order: 'asc' },
-  { name: 'цене', sort: 'price', order: 'asc' },
+  { name: 'популярности', sort: SortEnum.RATING, order: 'asc' },
+  { name: 'цене', sort: SortEnum.PRICE, order: 'asc' },
   {
     name: 'алфавиту',
-    sort: 'alphabet',
+    sort: SortEnum.ALPHABET,
     order: 'asc',
   },
 ];

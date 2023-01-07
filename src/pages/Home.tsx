@@ -2,15 +2,29 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
-import { setFilterSlice, selectFilters } from '../redux/slices/filterSlice';
+import { setFilterSlice, selectFilters, SortEnum } from '../redux/slices/filterSlice';
 import Categories from '../components/Categories';
 import Sort, { list } from '../components/Sort';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import PizzaBlock from '../components/PizzaBlock';
 import Pagination from '../components/Pagination';
-import { fetchPizzasItems, selectPizzas, StatusFetch } from '../redux/slices/pizzasSlice';
+import {
+  AsyncParams,
+  fetchPizzasItems,
+  selectPizzas,
+  StatusFetch,
+} from '../redux/slices/pizzasSlice';
 import cartEmptyImg from '../assets/img/empty-cart.png';
 import { useAppDispatch } from '../redux/store';
+
+export type ParseParams = {
+  category: string;
+  limit: string;
+  order: 'asc' | 'desc';
+  page: string;
+  search: string;
+  sortBy: SortEnum;
+};
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -22,17 +36,13 @@ const Home: React.FC = () => {
   const isMounted = useRef(false);
 
   const getPizzas = async () => {
-    const category = indexOfCategory ? `category=${indexOfCategory}` : '';
-    const sortBy = `&sortBy=${sortType.sort}&order=${sortType.order}`;
-    const search = searchValue ? `&search=${searchValue}` : '';
-
-    dispatch(fetchPizzasItems({ category, sortBy, search, currentPage, limit }));
+    dispatch(fetchPizzasItems({ indexOfCategory, sortType, searchValue, currentPage, limit }));
     window.scrollTo(0, 0);
   };
 
   useEffect(() => {
     if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
+      const params = qs.parse(window.location.search.substring(1)) as unknown as ParseParams;
       const sort = list.find((obj) => obj.sort === params.sortBy);
       dispatch(
         setFilterSlice({
