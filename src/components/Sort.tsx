@@ -1,14 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilters, setSortType, SortEnum } from '../redux/slices/filterSlice';
+import {selectFilters, setSortType, SortEnum, SortTypeState} from '../redux/slices/filterSlice';
 
-type SortItem = {
-  name: string;
-  sort: SortEnum;
-  order: 'asc' | 'desc';
-};
-
-export const list: SortItem[] = [
+export const list: SortTypeState[] = [
   { name: 'популярности', sort: SortEnum.RATING, order: 'asc' },
   { name: 'цене', sort: SortEnum.PRICE, order: 'asc' },
   {
@@ -24,7 +18,7 @@ const Sort: React.FC = () => {
   const sortRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
 
-  const onClickSelectedItem = (obj: SortItem) => {
+  const onClickSelectedItem = (obj: SortTypeState) => {
     dispatch(setSortType(obj));
     setOpen(false);
   };

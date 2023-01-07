@@ -44,13 +44,10 @@ export const filterSlice = createSlice({
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
-    setFilterSlice: (state, action) => {
-      // todo: :PayloadAction<FilterSliceState>
-      state.indexOfCategory = Number(action.payload.category);
-      state.sortType.sort = action.payload.sort.sort;
-      state.sortType.name = action.payload.sort.name;
-      state.sortType.order = action.payload.order;
-      state.currentPage = Number(action.payload.page);
+    setFilterSlice: (state, action:PayloadAction<FilterSliceState>) => {
+      state.indexOfCategory = action.payload.indexOfCategory;
+      state.sortType = action.payload.sortType;
+      state.currentPage = action.payload.currentPage;
     },
     setSearchValue: (state, action: PayloadAction<string>) => {
       state.searchValue = action.payload;
