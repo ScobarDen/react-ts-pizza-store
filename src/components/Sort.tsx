@@ -4,19 +4,19 @@ import { selectFilters, setSortType } from '../redux/slices/filterSlice';
 
 type SortItem = {
   name: string;
-  sort: string;
+  sort: 'rating' | 'price' | 'alphabet';
+  order: "asc" | "desc";
 };
 
-
 export const list: SortItem[] = [
-  { name: 'популярности', sort: 'rating' },
-  { name: 'цене', sort: 'price' },
+  { name: 'популярности', sort: 'rating', order: 'asc' },
+  { name: 'цене', sort: 'price', order: 'asc' },
   {
     name: 'алфавиту',
     sort: 'alphabet',
+    order: 'asc',
   },
 ];
-
 
 const Sort: React.FC = () => {
   const [open, setOpen] = useState(false);
