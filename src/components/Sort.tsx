@@ -6,6 +6,8 @@ type SortItem = {
   name: string;
   sort: string;
 };
+
+
 export const list: SortItem[] = [
   { name: 'популярности', sort: 'rating' },
   { name: 'цене', sort: 'price' },
@@ -14,6 +16,7 @@ export const list: SortItem[] = [
     sort: 'alphabet',
   },
 ];
+
 
 const Sort: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -27,8 +30,8 @@ const Sort: React.FC = () => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (e.target.closest('.sort') !== sortRef.current) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if ((e.target as Element).closest('.sort') !== sortRef.current) {
         setOpen(false);
       }
     };

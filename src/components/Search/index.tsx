@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import debounce from 'lodash.debounce';
 import styles from './Search.module.scss';
 import searchIcon from '../../assets/img/search_icon.svg';
@@ -23,7 +23,7 @@ function Search() {
     [],
   );
 
-  const changeInput = (e: any) => {
+  const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     changeSearchValue(value);
   };
