@@ -38,7 +38,7 @@ export const filterSlice = createSlice({
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
-    setFilterSlice: (state, action) => {
+    setFilterSlice: (state, action) => { // todo: :PayloadAction<FilterSliceState>
       state.indexOfCategory = Number(action.payload.category);
       state.sortType.sort = action.payload.sort.sort;
       state.sortType.name = action.payload.sort.name;

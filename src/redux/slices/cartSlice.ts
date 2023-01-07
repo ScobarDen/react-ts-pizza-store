@@ -28,7 +28,6 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem(state, action: PayloadAction<CartItem>) {
-      console.log(action)
       const findItem = state.items.find((pizzaObject) => pizzaObject.id === action.payload.id);
       findItem ? findItem.count++ : state.items.push({ ...action.payload, count: 1 });
       state.totalPrice = state.items.reduce((sum, item) => sum + item.price * item.count, 0);
