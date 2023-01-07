@@ -46,10 +46,10 @@ const Home: React.FC = () => {
       const sort = list.find((obj) => obj.sort === params.sortBy);
       dispatch(
         setFilterSlice({
-          indexOfCategory: Number(params.category),
-          currentPage: Number(params.page),
-          searchValue: params.search,
-          sortType: sort ? sort : list[0],
+          indexOfCategory: Number(params.category) || 0,
+          currentPage: Number(params.page) || 1,
+          searchValue: params.search || "",
+          sortType: sort || list[0],
         }),
       );
       isSearch.current = true;

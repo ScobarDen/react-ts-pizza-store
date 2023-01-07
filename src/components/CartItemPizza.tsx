@@ -1,17 +1,16 @@
 import { useDispatch } from 'react-redux';
-import { addItem, removeItem, removeOneItem } from '../redux/slices/cartSlice';
+import { addItem, CartItem, removeItem, removeOneItem } from '../redux/slices/cartSlice';
 import React from 'react';
 
-type CartItemProps = {
-  id: string;
-  title: string;
-  price: number;
-  imageUrl: string;
-  type: string;
-  size: number;
-  count: number;
-};
-const CartItem: React.FC<CartItemProps> = ({ id, title, price, imageUrl, type, size, count }) => {
+const CartItemPizza: React.FC<CartItem> = ({
+  id,
+  title,
+  price,
+  imageUrl,
+  type,
+  size,
+  count,
+}) => {
   const dispatch = useDispatch();
   return (
     <div className="cart__item">
@@ -51,13 +50,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, price, imageUrl, type, s
             dispatch(
               addItem({
                 id,
-                title,
-                price,
-                imageUrl,
-                type,
-                size,
-                count: 0,
-              }),
+              } as CartItem),
             )
           }>
           <svg
@@ -103,4 +96,4 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, price, imageUrl, type, s
   );
 };
 
-export default CartItem;
+export default CartItemPizza;
